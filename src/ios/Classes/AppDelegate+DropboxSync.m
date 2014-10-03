@@ -69,7 +69,7 @@
     NSLog( @"initializing DBAccountManager" );
 
     DBAccountManager *accountManager =
-      [[DBAccountManager alloc] initWithAppKey:@"cxi5tuz7s3vrd0w" secret:@"x6bl7f007w38vde"];
+      [[DBAccountManager alloc] initWithAppKey:@"__APP_KEY__" secret:@"__APP_SECRET__"];
     [DBAccountManager setSharedManager:accountManager];
     
     DBAccount *account = [accountManager.linkedAccounts objectAtIndex:0];

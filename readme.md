@@ -22,6 +22,8 @@ Objective-C code requires [JRSwizzle](https://github.com/rentzsch/jrswizzle) be 
 Other Notes
 -----------
 
+I'm mostly bumbling through this so if something looks dumb, please list it as an issue or send a pull request and I will get back to it when ever is most inconvenient to everyone.
+
 When building the iOS app, be sure to add the Dropbox Sync framework to your project, and all its dependencies as explained [on Dropbox's site concerning the iOS framework](https://www.dropbox.com/developers/sync/sdks/ios), but then you probably already know that if you're here.
 
 License
