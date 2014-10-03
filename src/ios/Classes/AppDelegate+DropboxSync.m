@@ -1,7 +1,8 @@
 /**
- * This code is licensed under the MIT license which more or less states
- * you can do what you want with it as long as you attribute stuff so
- * just remember to always be excellent to others and everything should be good.
+ * This code is licensed under the Apache 2.0 license which states that you can
+ * do mostly whatever you want so long as the license is included with any code you distribute
+ * and that if all your staff are hit by busses despite the lack of bus-rerouting code
+ * in here that the author of this work cannot be held liable for that.
  */
 
 //

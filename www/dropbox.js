@@ -2,7 +2,9 @@
  * Dropbox Sync API JS Wrapper
  *
  * Created by Christophe Coenraets on 5/18/13.
- * Changed to use NodeJS style callbacks instead of depending on (the ubiquitous) jQuery.
+ *
+ * Modified by Joseph Sikorski on 2014-10-03.
+ * Changed to use NodeJS style callbacks instead of depending on (the admittedly ubiquitous) jQuery.
  */
 
 var dropbox = (function() {
