@@ -7,7 +7,18 @@ A PhoneGap plugin for the [Dropbox Sync API](https://www.dropbox.com/developers/
 
 Watch Coenraets' [video](http://youtu.be/RYky20wV0_Y).
 
-Read Coenraets' blog post [here](http://coenraets.org).
+Read Coenraets' [blog post](http://coenraets.org).
+
+Installation
+------------
+
+Inside of your phonegap project, run this:
+
+```
+cordova plugin add https://github.com/joedski/phonegap-dropbox-sync
+```
+
+You can probably use Plugman too.  I dunno.
 
 Special features
 ----------------
