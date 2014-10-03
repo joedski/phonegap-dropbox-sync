@@ -1,101 +1,93 @@
+/**
+ * Dropbox Sync API JS Wrapper
+ *
+ * Created by Christophe Coenraets on 5/18/13.
+ * Changed to use NodeJS style callbacks instead of depending on (the ubiquitous) jQuery.
+ */
+
 var dropbox = (function() {
+    var pluginName = "DropboxPlugin";
 
-    var pluginName = "org.coenraets.DropboxPlugin";
-
-    var link = function() {
-        var deferred = $.Deferred();
+    var link = function( cb ) {
         Cordova.exec(
-            function(result) {
-                setTimeout(function() {
-                    deferred.resolve(result);
+            function( result ) {
+                // why timeout?
+                setTimeout( function() {
+                    cb( null, result );
                 }, 1000);
             },
-            function(error) {
-                deferred.reject(error);
+            function( error ) {
+                cb( error );
             },
             pluginName, "link", [""]);
-        return deferred.promise();
     }
 
-    var checkLink = function() {
-        var deferred = $.Deferred();
+    var checkLink = function( cb ) {
         Cordova.exec(
-            function(result) {
-                deferred.resolve(result);
+            function( result ) {
+                cb( null, result );
             },
-            function(error) {
-                deferred.reject(error);
+            function( error ) {
+                cb( error );
             },
             pluginName, "checkLink", [""]);
-        return deferred.promise();
     }
 
-    var unlink = function() {
-        var deferred = $.Deferred();
+    var unlink = function( cb ) {
         Cordova.exec(
-            function(result) {
-                deferred.resolve(result);
+            function( result ) {
+                cb( null, result );
             },
-            function(error) {
-                deferred.reject(error);
+            function( error ) {
+                cb( error );
             },
             pluginName, "unlink", [""]);
-        return deferred.promise();
     }
 
-    var listFolder = function(path) {
-        var deferred = $.Deferred();
+    var listFolder = function( path, cb ) {
         Cordova.exec(
-            function(result) {
-                deferred.resolve(result);
+            function( result ) {
+                cb( null, result );
             },
-            function(error) {
-                alert("getFiles error");
-                console.log("getFiles error");
-                deferred.reject(error);
+            function( error ) {
+                console.log( "getFiles error:" );
+                console.log( error );
+                cb( error );
             },
             pluginName, "listFolder", [path]);
-        return deferred.promise();
     }
 
-    var addObserver = function(path) {
-        var deferred = $.Deferred();
+    var addObserver = function( path, cb ) {
         Cordova.exec(
-            function(result) {
-                alert("addObserver result");
-                deferred.resolve(result);
+            function( result ) {
+                cb( null, result );
             },
-            function(error) {
-                deferred.reject(error);
+            function( error ) {
+                cb( error );
             },
             pluginName, "addObserver", [path]);
-        return deferred.promise();
     }
 
-    var readData = function (fileName) {
-        var deferred = $.Deferred();
+    var readData = function( fileName, cb ) {
         Cordova.exec(
-            function(result) {
-                deferred.resolve(result);
+            function( result ) {
+                cb( null, result );
             },
-            function(error) {
-                deferred.reject();
+            function( error ) {
+                cb( error );
             },
             pluginName, "readData", [fileName]);
-        return deferred.promise();
     }
 
-    var readString = function (fileName) {
-        var deferred = $.Deferred();
+    var readString = function( fileName, cb ) {
         Cordova.exec(
-            function(result) {
-                deferred.resolve(result);
+            function( result ) {
+                cb( null, result );
             },
-            function(error) {
-                deferred.reject();
+            function( error ) {
+                cb( error );
             },
             pluginName, "readString", [fileName]);
-        return deferred.promise();
     }
 
     return {

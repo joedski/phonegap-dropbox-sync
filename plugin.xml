@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  id="org.coenraets.phonegap.dropboxsync"
+  version="0.0.1">
+  <name>DropboxSync</name>
+  <description>Dropbox Sync Plugin</description>
+  <license>Apache 2.0</license>
+  <keywords>Dropbox</keywords>
+  <repo>https://github.com/ccoenraets/phonegap-dropbox-sync.git</repo>
+  <issue>https://github.com/ccoenraets/phonegap-dropbox-sync/issues</issue>
+
+  <js-module src="www/dropbox.js" name="DropboxSync">
+    <clobbers target="dropboxsync" />
+  </js-module>
+
+  <!-- android -->
+  <!-- no android source at the moment... -->
+  <!-- <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="Keyboard">
+        <param name="android-package" value="com.ionic.keyboard.IonicKeyboard" />
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/IonicKeyboard.java" target-dir="src/com/ionic/keyboard" />
+  </platform> -->
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="DropboxSync">
+        <param name="ios-package" value="DropboxPlugin" />
+      </feature>
+    </config-file>
+
+    <source-file src="src/ios/Classes/AppDelegate+DropboxSync.m" />
+    <header-file src="src/ios/Plugins/DropboxPlugin.h" />
+    <source-file src="src/ios/Plugins/DropboxPlugin.m" />
+  </platform>
+
+</plugin>
