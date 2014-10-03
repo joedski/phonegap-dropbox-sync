@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-  id="org.coenraets.phonegap.dropboxsync"
+  id="org.joedski.phonegap.dropboxsync"
   version="0.0.1">
-  <name>DropboxSync</name>
-  <description>Dropbox Sync Plugin</description>
-  <license>Apache 2.0</license>
+  <name>Dropbox Sync</name>
+  <author>Christophe Coenraets, Joseph Sikorski</author>
+  <description>Adds Dropbox Sync support to your Phonegap application.</description>
+  <license>MIT</license>
   <keywords>Dropbox</keywords>
-  <repo>https://github.com/ccoenraets/phonegap-dropbox-sync.git</repo>
-  <issue>https://github.com/ccoenraets/phonegap-dropbox-sync/issues</issue>
+  <repo>https://github.com/joedski/phonegap-dropbox-sync.git</repo>
+  <issue>https://github.com/joedski/phonegap-dropbox-sync/issues</issue>
 
   <js-module src="www/dropbox.js" name="DropboxSync">
     <clobbers target="dropboxsync" />
