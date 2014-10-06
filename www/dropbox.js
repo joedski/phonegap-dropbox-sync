@@ -84,6 +84,7 @@ var dropbox = (function() {
         callCordovaExec( 'addObserver', [ path ], cb );
     }
 
+    // TODO
     function removeObserver( observerId, cb ) {
         callCordovaExec( 'removeObserver', [ observerId ], cb );
     }
@@ -92,16 +93,52 @@ var dropbox = (function() {
     // Files and Data
     ////////////////////
 
-    function readData( fileName, cb ) {
-        callCordovaExec( 'readData', [ fileName ], cb );
+    function readData( filePath, cb ) {
+        callCordovaExec( 'readData', [ filePath ], cb );
     }
 
-    function readString( fileName, cb ) {
-        callCordovaExec( 'readString', [ fileName ], cb );
+    function readString( filePath, cb ) {
+        callCordovaExec( 'readString', [ filePath ], cb );
     }
 
-    function getImageBase64String( fileName, cb ) {
-        callCordovaExec( 'getImageBase64String', [ fileName ], cb );
+    // TODO
+    function writeData( filePath, data, cb ) {
+        callCordovaExec( 'writeData', [ filePath, data ], cb );
+    }
+
+    // TODO
+    function writeString( filePath, str, cb ) {
+        callCordovaExec( 'writeString', [ filePath, str ], cb );
+    }
+
+    // TODO
+    function getImageBase64String( filePath, cb ) {
+        callCordovaExec( 'getImageBase64String', [ filePath ], cb );
+    }
+
+    // TODO
+    function uploadFile( localPath, dropboxPath, cb ) {
+        callCordovaExec( 'uploadFile', [ localPath, dropboxPath ], cb );
+    }
+
+    // TODO
+    function uploadFolder( localPath, dropboxPath, cb ) {
+        callCordovaExec( 'uploadFolder', [ localPath, dropboxPath ], cb );
+    }
+
+    // TODO
+    function deleteFile( filePath, cb ) {
+        callCordovaExec( 'deleteFile', [ filePath ], cb );
+    }
+
+    // TODO
+    function createFolder( folderPath, cb ) {
+        callCordovaExec( 'createFolder', [ folderPath ], cb );
+    }
+
+    // TODO
+    function openFile( filePath, cb ) {
+        callCordovaExec( 'openFile', [ filePath ], cb );
     }
 
     return {
