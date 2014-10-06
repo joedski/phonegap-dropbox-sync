@@ -29,7 +29,6 @@
     
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-
 }
 
 - (void) checkLink:(CDVInvokedUrlCommand*)command
@@ -115,7 +114,6 @@
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArrayBuffer: data];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
-    
 }
 
 
@@ -135,8 +133,28 @@
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: data];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
-    
-    
+}
+
+
+- (void)writeString:(CDVInvokedUrlCommand*)command
+{
+    NSLog(@"Executing writeString()");
+
+    [self.commandDelegate runInBackground: ^{
+        NSError* error;
+
+        CDVPluginResult* pluginResult = nil;
+        NSString* path = [command.arguments objectAtIndex: 0];
+        NSString* contents = [command.arguments objectAtIndex: 1];
+
+        DBPath *newPath = [[DBPath root] childPath:path];
+        DBFile *file = [[DBFilesystem sharedFilesystem] openFile:newPath error:nil];
+
+        BOOL didSucceed = [file writeString: contents error: &error];
+
+        pluginResult = [CDVPluginResult resultWithStatus: (didSucceed ? CDVCommandStatus_OK : CDVCommandStatus_ERROR)];
+        [self.commandDelegate sendPluginResult: pluginResult callbackId: command.callbackId];
+    }];
 }
 
 @end
