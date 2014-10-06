@@ -28,7 +28,7 @@ Don't need to modify the auto-generated App Delegate as the necessary changes ar
 Dependencies
 ------------
 
-Objective-C code requires [JRSwizzle](https://github.com/rentzsch/jrswizzle) be available during compilation.
+Objective-C code requires [JRSwizzle](https://github.com/rentzsch/jrswizzle) be available during compilation.  [I stuck it in a PhoneGap plugin for convenience.](https://github.com/joedski/phonegap-jrswizzle)
 
 Other Notes
 -----------
