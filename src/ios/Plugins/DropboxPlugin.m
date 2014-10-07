@@ -87,6 +87,7 @@
 }
 
 
+// TODO: Refactor to make removable?
 - (void)addObserver:(CDVInvokedUrlCommand*)command
 {
     NSLog(@"Executing addObserver()");

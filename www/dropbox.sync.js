@@ -46,6 +46,12 @@ function callCordovaExec( commandName, args, cb ) {
 // Account
 ////////////////////
 
+/**
+ * Tries to link this app to the user's Dropbox Account.
+ * Will always call cb with successful result regardless of whether or not
+ * the user actually linked the app, necessitating a call to checkLink()
+ * to actually check if the user succeeded.
+ */
 function link( cb ) {
     // Manual because of setTimeout call in success.
     Cordova.exec(
@@ -63,10 +69,19 @@ function link( cb ) {
         pluginName, "link", [""]);
 }
 
+/**
+ * Checks if app is linked to the user's Dropbox Account.
+ * Calls the callback with no error if the account is linked,
+ * and WITH an error if the account is not linked.
+ */
 function checkLink( cb ) {
     callCordovaExec( 'checkLink', cb );
 }
 
+/**
+ * Tries to unlink the user's Dropbox account.
+ * Always calls back with success.
+ */
 function unlink( cb ) {
     callCordovaExec( 'unlink', cb );
 }
@@ -75,6 +90,15 @@ function unlink( cb ) {
 // File System
 ////////////////////
 
+// TODO: Add thumbExists:Boolean and iconName:String
+/**
+ * Lists the contents of a folder, calling back with an array of objects
+ * each with the following properties:
+ * - path :String
+ * - modifiedTime :Number
+ * - fileSize :Number - Always 0 for folders.
+ * - isFolder :Boolean
+ */
 function listFolder( path, cb ) {
     callCordovaExec( 'listFolder', [ path ], cb );
 }
@@ -84,8 +108,9 @@ function addObserver( path, cb ) {
 }
 
 // TODO: (Add to plugin), (Add export line at EOF)
-function removeObserver( observerId, cb ) {
-    callCordovaExec( 'removeObserver', [ observerId ], cb );
+// TODO: Decide if actually need to add this.
+function removeObserver( cb ) {
+    callCordovaExec( 'removeObserver', cb );
 }
 
 ////////////////////
