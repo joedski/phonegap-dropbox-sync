@@ -98,6 +98,8 @@
   annotation: (id) annotation
 {
     NSLog( @"dbs_application:openURL:sourceApplication:annotation:" );
+    NSLog( @"url: %@", url );
+    NSLog( @"annotation: %@", annotation );
 
     DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
 
