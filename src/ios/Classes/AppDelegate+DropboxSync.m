@@ -68,8 +68,11 @@
 {
     NSLog( @"initializing DBAccountManager" );
 
+    NSString *appKey = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"DropboxAppKey"];
+    NSString *appSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"DropboxAppSecret"];
+
     DBAccountManager *accountManager =
-      [[DBAccountManager alloc] initWithAppKey:@"__APP_KEY__" secret:@"__APP_SECRET__"];
+      [[DBAccountManager alloc] initWithAppKey: appKey secret: appSecret];
     [DBAccountManager setSharedManager:accountManager];
     
     DBAccount *account = [accountManager.linkedAccounts objectAtIndex:0];

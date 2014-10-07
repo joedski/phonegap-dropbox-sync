@@ -43,6 +43,13 @@
       </feature>
     </config-file>
 
+    <config-file target="*-Info.plist">
+    <key>DropboxAppKey</key>
+    <string>$DB_APP_KEY</string>
+    <key>DropboxAppSecret</key>
+    <string>$DB_APP_SECRET</string>
+    </config-file>
+
     <source-file src="src/ios/Classes/AppDelegate+DropboxSync.m" />
     <header-file src="src/ios/Plugins/DropboxPlugin.h" />
     <source-file src="src/ios/Plugins/DropboxPlugin.m" />
