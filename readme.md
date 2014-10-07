@@ -17,13 +17,25 @@ The Sync API is exposed through the following global/window variable in JS: `win
 Installation
 ------------
 
-Inside of your phonegap project, run this:
+Using Cordova: 
 
 ```
-cordova plugin add https://github.com/joedski/phonegap-dropbox-sync
+cordova plugin add https://github.com/joedski/phonegap-dropbox-sync --variable 'DB_APP_KEY=<dropbox-app-key>' --variable 'DB_APP_SECRET=<dropbox-app-secret>'
 ```
 
-You can probably use Plugman too.  I dunno.
+Using Plugman:
+
+```
+plugman install https://github.com/joedski/phonegap-dropbox-sync --platform ios --project path/to/project --variable 'DB_APP_KEY=<dropbox-app-key>' --variable 'DB_APP_SECRET=<dropbox-app-secret>'
+```
+
+Obviously, you should replace <dropbox-app-key> and <dropbox-app-secret> with your app's key and secret for the Dropbox API.  For example, if your app key is `abc123xyz999` and your app secret is `herpderpderp` then you enter the command like this:
+
+```
+cordova plugin add https://github.com/joedski/phonegap-dropbox-sync --variable 'DB_APP_KEY=abc123xyz999' --variable 'DB_APP_SECRET=herpderpderp'
+```
+
+If you don't specify these variables, Cordova and Plugman will get very cross with you indeed.
 
 Special features
 ----------------
