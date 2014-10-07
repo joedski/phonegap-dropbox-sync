@@ -42,7 +42,7 @@
     
     pluginResult = [CDVPluginResult
                     resultWithStatus: CDVCommandStatus_OK
-                    messageAsBool: resultWithStatus:account ? YES : NO];
+                    messageAsBool: account ? YES : NO];
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
