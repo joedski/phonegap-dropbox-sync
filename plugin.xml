@@ -11,6 +11,9 @@
   <repo>https://github.com/joedski/phonegap-dropbox-sync.git</repo>
   <issue>https://github.com/joedski/phonegap-dropbox-sync/issues</issue>
 
+  <preference name="DB_APP_KEY" />
+  <preference name="DB_APP_SECRET" />
+
   <engines>
     <engine name="cordova" version=">=3.0.0" />
   </engines>
