@@ -71,6 +71,8 @@
     NSString *appKey = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"DropboxAppKey"];
     NSString *appSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey: @"DropboxAppSecret"];
 
+    NSLog( @"Got app key \"%@\" and app secret \"%@\"", appKey, appSecret );
+
     DBAccountManager *accountManager =
       [[DBAccountManager alloc] initWithAppKey: appKey secret: appSecret];
     [DBAccountManager setSharedManager:accountManager];

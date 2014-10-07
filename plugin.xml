@@ -47,10 +47,12 @@
     </config-file>
 
     <config-file target="*-Info.plist">
-    <key>DropboxAppKey</key>
-    <string>$DB_APP_KEY</string>
-    <key>DropboxAppSecret</key>
-    <string>$DB_APP_SECRET</string>
+    <dict>
+      <key>DropboxAppKey</key>
+      <string>$DB_APP_KEY</string>
+      <key>DropboxAppSecret</key>
+      <string>$DB_APP_SECRET</string>
+    </dict>
     </config-file>
 
     <source-file src="src/ios/Classes/AppDelegate+DropboxSync.m" />
