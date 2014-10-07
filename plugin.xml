@@ -16,7 +16,7 @@
   </engines>
 
   <js-module src="www/dropbox.js" name="DropboxSync">
-    <clobbers target="dropboxsync" />
+    <clobbers target="dropbox" />
   </js-module>
 
   <!-- android -->

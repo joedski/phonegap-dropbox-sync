@@ -7,7 +7,7 @@
  * Changed to use NodeJS style callbacks instead of depending on (the admittedly ubiquitous) jQuery.
  */
 
-var dropbox = (function() {
+exports.sync = (function() {
     var pluginName = "DropboxPlugin";
     var slice = [].slice;
 
@@ -150,5 +150,4 @@ var dropbox = (function() {
         readData: readData,
         readString: readString
     }
-
 }());
