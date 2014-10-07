@@ -40,7 +40,10 @@
     
     DBAccount* account = [[DBAccountManager sharedManager] linkedAccount];
     
-    pluginResult = [CDVPluginResult resultWithStatus:account ? CDVCommandStatus_OK : CDVCommandStatus_ERROR];
+    pluginResult = [CDVPluginResult
+                    resultWithStatus: CDVCommandStatus_OK
+                    messageAsBool: resultWithStatus:account ? YES : NO];
+
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 

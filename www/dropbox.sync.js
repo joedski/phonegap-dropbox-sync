@@ -71,8 +71,7 @@ function link( cb ) {
 
 /**
  * Checks if app is linked to the user's Dropbox Account.
- * Calls the callback with no error if the account is linked,
- * and WITH an error if the account is not linked.
+ * Calls back with true if the account is linked, false if it is not linked.
  */
 function checkLink( cb ) {
     callCordovaExec( 'checkLink', cb );
