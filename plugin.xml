@@ -16,7 +16,7 @@
   </engines>
 
   <!-- This results in a cordova module name of 'org.joedski.phonegap.dropbox.sync.DropboxSync'... Hm. -->
-  <js-module src="www/dropbox.js" name="DropboxSync">
+  <js-module src="www/dropbox.sync.js" name="DropboxSync">
     <clobbers target="dropbox.sync" />
   </js-module>
 
