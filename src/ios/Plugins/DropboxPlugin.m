@@ -31,6 +31,7 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+
 - (void) checkLink:(CDVInvokedUrlCommand*)command
 {
     NSLog(@"Executing checklink()");
@@ -55,6 +56,7 @@
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
+
 
 - (void)listFolder:(CDVInvokedUrlCommand*)command
 {
