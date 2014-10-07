@@ -9,6 +9,11 @@ Watch Coenraets' [video](http://youtu.be/RYky20wV0_Y).
 
 Read Coenraets' [blog post](http://coenraets.org).
 
+Usage
+-----
+
+The Sync API is exposed through the following global/window variable in JS: `window.dropbox.sync`.
+
 Installation
 ------------
 
@@ -36,6 +41,8 @@ Other Notes
 I'm mostly bumbling through this so if something looks dumb, please list it as an issue or send a pull request and I will get back to it when ever is most inconvenient to everyone.
 
 When building the iOS app, be sure to add the Dropbox Sync framework to your project, and all its dependencies as explained [on Dropbox's site concerning the iOS framework](https://www.dropbox.com/developers/sync/sdks/ios), but then you probably already know that if you're here.
+
+I think it goes without saying that this plugin is neither endorsed by nor supported by Dropbox and Dropbox are not responsible for any problems caused by this ... thing.  Unless you can determine that it's actually the DropboxSync framework that's causing issues, don't bother them.
 
 License
 -------

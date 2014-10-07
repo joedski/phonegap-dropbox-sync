@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-  id="org.joedski.phonegap.dropboxsync"
+  id="org.joedski.phonegap.dropbox.sync"
   version="0.0.1">
   <name>Dropbox Sync</name>
   <author>Christophe Coenraets, Joseph Sikorski</author>
@@ -15,8 +15,9 @@
     <engine name="cordova" version=">=3.0.0" />
   </engines>
 
+  <!-- This results in a cordova module name of 'org.joedski.phonegap.dropbox.sync.DropboxSync'... Hm. -->
   <js-module src="www/dropbox.js" name="DropboxSync">
-    <clobbers target="dropbox" />
+    <clobbers target="dropbox.sync" />
   </js-module>
 
   <!-- android -->
@@ -36,6 +37,7 @@
   <!-- ios -->
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
+      <!-- Exec using the plugin name 'DropboxSync'.  'DropboxPlugin' is the Objective-C class Cordova searches for. -->
       <feature name="DropboxSync">
         <param name="ios-package" onload="true" value="DropboxPlugin" />
       </feature>
