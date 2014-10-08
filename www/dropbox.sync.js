@@ -227,6 +227,6 @@ exports.fileChange = fileChange;
 exports.onFileChange = makeOnChangeFor( fileChangeCallbacks );
 exports.offFileChange = makeOffChangeFor( fileChangeCallbacks );
 
-exports.accontChange = accontChange;
+exports.accountChange = accountChange;
 exports.onAccountChange = makeOnChangeFor( accountChangeCallbacks );
 exports.offAccountChange = makeOffChangeFor( accountChangeCallbacks );
