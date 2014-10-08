@@ -15,6 +15,28 @@
 @implementation DropboxPlugin
 
 
+- (void) pluginInitialize
+{
+    [self addAccountObserver];
+    [super pluginInitialize]; // nothing?
+}
+
+
+- (void) addAccountObserver
+{
+    NSLog( @"Adding account manager observer to listen for account changes." );
+
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    UIViewController *topView = appDelegate.viewController;
+    NSString* jsCommand = @"dropbox.sync.accountChange();";
+
+    [[DBAccountManager sharedManager] addObserver: topView block: ^{
+        NSLog( @"Account change!" );
+        [self writeJavascript: jsCommand];
+    }];
+}
+
+
 - (void) link:(CDVInvokedUrlCommand*)command
 {
     NSLog(@"Executing link()");
@@ -96,10 +118,13 @@
     NSLog(@"Executing addObserver()");
     NSString* path = [command.arguments objectAtIndex:0];
     DBPath *newPath = [[DBPath root] childPath:path];
+    // TODO: Escape quotes in path name.
+    NSString* jsCommand =
+        [NSString stringWithFormat: @"dropbox.sync.fileChange( \"%@\", { descendants: true });", path];
     
-    [[DBFilesystem sharedFilesystem] addObserver:self forPathAndDescendants:newPath block:^() {
-        NSLog(@"File change!");
-        [self writeJavascript:@"dropbox_fileChange()"];
+    [[DBFilesystem sharedFilesystem] addObserver:self forPathAndDescendants:newPath block:^{
+        NSLog( @"File change!" );
+        [self writeJavascript: jsCommand];
     }];
 }
 

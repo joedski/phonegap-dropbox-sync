@@ -164,6 +164,57 @@ function openFile( filePath, cb ) {
     callCordovaExec( 'openFile', [ filePath ], cb );
 }
 
+////////////////////
+// Observer triggers (You probably shouldn't call these yourself.)
+////////////////////
+
+function makeOnChangeFor( callbacks ) {
+    return function onChange( cb ) {
+        if( ! cb ) return;
+        callbacks.push( cb );
+    };
+}
+
+function makeOffChangeFor( callbacks ) {
+    return function offChange( cb ) {
+        var cbIndex;
+
+        if( cb ) {
+            cbIndex = callbacks.indexOf( cb );
+
+            if( cbIndex > -1 ) {
+                callbacks.splice( cbIndex, 1 );
+            }
+        }
+        else {
+            callbacks.length = 0;
+        }
+    };
+}
+
+//////// File Changes
+
+var fileChangeCallbacks = [];
+
+function fileChange( filePath, options ) {
+    options = _.defaults( options || {}, {
+        // This indicates that it was triggered by addObserver:forPathAndDescendants:block:
+        descendants: false,
+        // This indicates that it was triggered by addObserver:forPathAndChildren:block:
+        children: false
+    });
+
+    _.invoke( fileChangeCallbacks, 'call', null, options );
+}
+
+//////// Account Changes
+
+var accountChangeCallbacks = [];
+
+function accountChange() {
+    _.invoke( accountChangeCallbacks, 'call', null );
+}
+
 exports.link = link;
 exports.checkLink = checkLink;
 exports.unlink = unlink;
@@ -171,3 +222,11 @@ exports.listFolder = listFolder;
 exports.addObserver = addObserver;
 exports.readData = readData;
 exports.readString = readString;
+
+exports.fileChange = fileChange;
+exports.onFileChange = makeOnChangeFor( fileChangeCallbacks );
+exports.offFileChange = makeOffChangeFor( fileChangeCallbacks );
+
+exports.accontChange = accontChange;
+exports.onAccountChange = makeOnChangeFor( accountChangeCallbacks );
+exports.offAccountChange = makeOffChangeFor( accountChangeCallbacks );
