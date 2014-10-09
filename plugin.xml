@@ -54,6 +54,22 @@
     <string>$DB_APP_SECRET</string>
     </config-file>
 
+    <!-- Auto-add the URL scheme. -->
+    <config-file target="*-Info.plist"  parent="CFBundleURLTypes">
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>Dropbox API</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>db-$DB_APP_KEY</string>
+        </array>
+      </dict>
+    </array>
+    </config-file>
+
     <source-file src="src/ios/Classes/AppDelegate+DropboxSync.m" />
     <header-file src="src/ios/Plugins/DropboxPlugin.h" />
     <source-file src="src/ios/Plugins/DropboxPlugin.m" />
