@@ -9,6 +9,7 @@
 
 var pluginName = "DropboxSync";
 var slice = [].slice;
+var noop = function() {};
 
 // callCordovaExec( commandName, cb )
 // callCordovaExec( commandName, [ arg, arg, ... ], cb )
@@ -16,6 +17,10 @@ function callCordovaExec( commandName, args, cb ) {
     if( ! cb && typeof args == 'function' ) {
         cb = args;
         args = [ '' ];
+    }
+
+    if( ! cb ) {
+        cb = noop;
     }
 
     if( ! args ) {
@@ -214,7 +219,7 @@ function defaults( target ) {
         nextSource = rest[ ri ];
 
         if( ! nextSource ) continue;
-        
+
         for( var pn in nextSource ) {
             if( target.hasOwnProperty( pn ) ) continue;
             target[ pn ] = nextSource[ pn ];
