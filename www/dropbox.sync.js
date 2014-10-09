@@ -245,7 +245,7 @@ function trigger( eventName, eventProperties ) {
         callbacks = eventCallbacks[ propName ].slice( 0 );
 
         for( var cbi = 0, cbl = callbacks.length; cbi < cbl; ++cbi ) {
-            callbacks[ cbi ]( cb );
+            callbacks[ cbi ]( eventProperties );
         }
     }
 }
