@@ -28,7 +28,7 @@
 
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     UIViewController *topView = appDelegate.viewController;
-    NSString* jsCommand = @"dropbox.sync.accountChange();";
+    NSString* jsCommand = @"dropbox.sync.trigger( 'accountChange' );";
 
     [[DBAccountManager sharedManager] addObserver: topView block: ^{
         NSLog( @"Account change!" );
@@ -120,7 +120,7 @@
     DBPath *newPath = [[DBPath root] childPath:path];
     // TODO: Escape quotes in path name.
     NSString* jsCommand =
-        [NSString stringWithFormat: @"dropbox.sync.fileChange( \"%@\", { descendants: true });", path];
+        [NSString stringWithFormat: @"dropbox.sync.trigger( 'fileChange', { path: \"%@\", descendants: true });", path];
     
     [[DBFilesystem sharedFilesystem] addObserver:self forPathAndDescendants:newPath block:^{
         NSLog( @"File change!" );

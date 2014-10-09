@@ -168,51 +168,90 @@ function openFile( filePath, cb ) {
 // Observer triggers (You probably shouldn't call these yourself.)
 ////////////////////
 
-function makeOnChangeFor( callbacks ) {
-    return function onChange( cb ) {
-        if( ! cb ) return;
-        callbacks.push( cb );
-    };
+/**
+ * Currently implemented events:
+ */
+
+/**
+ * Event: fileChange
+ * Properties:
+ * - path :String - Path of the file or folder being observed for changes.
+ * - descendants :Boolean - True if the observer was set for the given path and descendants.
+ * - children :Boolean - True if the observer was set for the given path and immediate children.
+ *
+ * Note: For descendants and chlidren, the path will be the same regardless of what file/folder change
+ * triggered the 'fileChange' event for a given observer.
+ * If a specific file's changes must be known, an observer must be added for that file.
+ */
+
+/**
+ * Event: accountChange
+ * Properties: none
+ *
+ * Indicates that an account was linked to or unlinked from the current app.
+ */
+
+var eventCallbacks = {
+    'event:fileChange': [],
+    'event:accountChange': []
+};
+
+var eventPropertyDefaults = {
+    'event:fileChange': {
+        path: '',
+        children: false,
+        descendants: false
+    },
+
+    'event:accountChange': {}
+};
+
+function propertyNameForEventName( eventName ) {
+    return 'event:' + String( eventName );
 }
 
-function makeOffChangeFor( callbacks ) {
-    return function offChange( cb ) {
-        var cbIndex;
+function trigger( eventName, eventProperties ) {
+    var propName = propertyNameForEventName( eventName );
 
-        if( cb ) {
-            cbIndex = callbacks.indexOf( cb );
+    eventProperties = eventProperties || {};
+    _.defaults( eventProperties, eventPropertyDefaults[ propName ] || {} );
 
-            if( cbIndex > -1 ) {
-                callbacks.splice( cbIndex, 1 );
-            }
+    if( eventCallbacks.hasOwnProperty( propName ) && eventCallbacks[ propName ] ) {
+        _.invoke( eventCallbacks[ propName ], null, 'apply', eventProperties );
+    }
+}
+
+function on( eventName, cb ) {
+    var propName = propertyNameForEventName( eventName );
+    var callbacksCollection;
+
+    if( ! eventCallbacks.hasOwnProperty( propName ) ) {
+        eventCallbacks[ propName ] = [];
+    }
+
+    eventCallbacks[ propName ].push( cb );
+}
+
+function off( eventName, cb ) {
+    var cbIndex, callbacksCollection;
+
+    if( eventCallbacks.hasOwnProperty( propName ) && eventCallbacks[ propName ] ) {
+        callbacksCollection = eventCallbacks[ propName ];
+    }
+    else {
+        return;
+    }
+
+    if( cb ) {
+        cbIndex = callbacksCollection.indexOf( cb );
+
+        if( cbIndex > -1 ) {
+            callbacksCollection.splice( cbIndex, 1 );
         }
-        else {
-            callbacks.length = 0;
-        }
-    };
-}
-
-//////// File Changes
-
-var fileChangeCallbacks = [];
-
-function fileChange( filePath, options ) {
-    options = _.defaults( options || {}, {
-        // This indicates that it was triggered by addObserver:forPathAndDescendants:block:
-        descendants: false,
-        // This indicates that it was triggered by addObserver:forPathAndChildren:block:
-        children: false
-    });
-
-    _.invoke( fileChangeCallbacks, 'call', null, options );
-}
-
-//////// Account Changes
-
-var accountChangeCallbacks = [];
-
-function accountChange() {
-    _.invoke( accountChangeCallbacks, 'call', null );
+    }
+    else {
+        callbacksCollection.length = 0;
+    }
 }
 
 exports.link = link;
@@ -223,10 +262,6 @@ exports.addObserver = addObserver;
 exports.readData = readData;
 exports.readString = readString;
 
-exports.fileChange = fileChange;
-exports.onFileChange = makeOnChangeFor( fileChangeCallbacks );
-exports.offFileChange = makeOffChangeFor( fileChangeCallbacks );
-
-exports.accountChange = accountChange;
-exports.onAccountChange = makeOnChangeFor( accountChangeCallbacks );
-exports.offAccountChange = makeOffChangeFor( accountChangeCallbacks );
+exports.trigger = trigger;
+exports.off = off;
+exports.on = on;
