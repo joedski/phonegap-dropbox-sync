@@ -206,18 +206,42 @@ var eventPropertyDefaults = {
     'event:accountChange': {}
 };
 
+function defaults( target ) {
+    var rest = slice.call( arguments, 1 );
+    var nextSource;
+
+    for( var ri = 0, rl = rest.length; ri < rl; ++ri ) {
+        nextSource = rest[ ri ];
+
+        if( ! nextSource ) continue;
+        
+        for( var pn in nextSource ) {
+            if( target.hasOwnProperty( pn ) ) continue;
+            target[ pn ] = nextSource[ pn ];
+        }
+    }
+
+    return target;
+}
+
 function propertyNameForEventName( eventName ) {
     return 'event:' + String( eventName );
 }
 
 function trigger( eventName, eventProperties ) {
     var propName = propertyNameForEventName( eventName );
+    var callbacks;
 
     eventProperties = eventProperties || {};
-    _.defaults( eventProperties, eventPropertyDefaults[ propName ] || {} );
+    defaults( eventProperties, eventPropertyDefaults[ propName ] || {} );
 
     if( eventCallbacks.hasOwnProperty( propName ) && eventCallbacks[ propName ] ) {
-        _.invoke( eventCallbacks[ propName ], null, 'apply', eventProperties );
+        // Clone array just in case a callback removes itself.
+        callbacks = eventCallbacks[ propName ].slice( 0 );
+
+        for( var cbi = 0, cbl = callbacks.length; cbi < cbl; ++cbi ) {
+            callbacks[ cbi ]( cb );
+        }
     }
 }
 

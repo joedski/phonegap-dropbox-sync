@@ -30,10 +30,18 @@
     UIViewController *topView = appDelegate.viewController;
     NSString* jsCommand = @"dropbox.sync.trigger( 'accountChange' );";
 
-    [[DBAccountManager sharedManager] addObserver: topView block: ^{
+    [[DBAccountManager sharedManager] addObserver: topView block: (^( DBAccount *account ){
         NSLog( @"Account change!" );
+        NSLog( @"Number of accounts is now: %d", [[[DBAccountManager sharedManager] linkedAccounts] count]);
+        if( account != nil ) {
+            NSLog( @"Account added!  user name = %@", [[account info] displayName] );
+        }
+        else {
+            NSLog( @"Account removed?" );
+        }
+
         [self writeJavascript: jsCommand];
-    }];
+    })];
 }
 
 
