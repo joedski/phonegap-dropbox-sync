@@ -39,6 +39,8 @@
 
   <!-- ios -->
   <platform name="ios">
+    <dependency id="org.rentzsch.jrswizzle" url="https://github.com/joedski/phonegap-jrswizzle" commit="master" />
+
     <config-file target="config.xml" parent="/*">
       <!-- Exec using the plugin name 'DropboxSync'.  'DropboxPlugin' is the Objective-C class Cordova searches for. -->
       <feature name="DropboxSync">
