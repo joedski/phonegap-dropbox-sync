@@ -121,10 +121,16 @@ function removeObserver( cb ) {
 // Files and Data
 ////////////////////
 
+/**
+ * Reads the contents of a target file, returning them as an ArrayBuffer.
+ */
 function readData( filePath, cb ) {
     callCordovaExec( 'readData', [ filePath ], cb );
 }
 
+/**
+ * Reads the contents of a target file, returning them as a String.
+ */
 function readString( filePath, cb ) {
     callCordovaExec( 'readString', [ filePath ], cb );
 }

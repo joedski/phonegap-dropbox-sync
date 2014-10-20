@@ -45,7 +45,7 @@
 }
 
 
-- (void) link:(CDVInvokedUrlCommand*)command
+- (void) link: (CDVInvokedUrlCommand *) command
 {
     NSLog(@"Executing link()");
 
@@ -62,7 +62,7 @@
 }
 
 
-- (void) checkLink:(CDVInvokedUrlCommand*)command
+- (void) checkLink: (CDVInvokedUrlCommand *) command
 {
     NSLog(@"Executing checklink()");
 
@@ -78,7 +78,7 @@
 }
 
 
-- (void) unlink:(CDVInvokedUrlCommand*)command
+- (void) unlink: (CDVInvokedUrlCommand *) command
 {
     NSLog(@"Executing unlink()");
 
@@ -91,7 +91,7 @@
 }
 
 
-- (void)listFolder:(CDVInvokedUrlCommand*)command
+- (void) listFolder: (CDVInvokedUrlCommand *) command
 {
     NSLog(@"Executing listFolder()");
 
@@ -121,7 +121,7 @@
 
 
 // TODO: Refactor to make removable?
-- (void)addObserver:(CDVInvokedUrlCommand*)command
+- (void) addObserver: (CDVInvokedUrlCommand *) command
 {
     NSLog(@"Executing addObserver()");
     NSString* path = [command.arguments objectAtIndex:0];
@@ -137,7 +137,7 @@
 }
 
 
-- (void)readData:(CDVInvokedUrlCommand*)command
+- (void) readData: (CDVInvokedUrlCommand *) command
 {
     NSLog(@"Executing readData()");
 
@@ -156,7 +156,10 @@
 }
 
 
-- (void)readString:(CDVInvokedUrlCommand*)command
+// - (void) writeData: (CDVInvokedUrlCommand *) command {}
+
+
+- (void) readString: (CDVInvokedUrlCommand *) command
 {
     NSLog(@"Executing readString()");
 
@@ -175,7 +178,7 @@
 }
 
 
-- (void)writeString:(CDVInvokedUrlCommand*)command
+- (void) writeString: (CDVInvokedUrlCommand *) command
 {
     NSLog(@"Executing writeString()");
 
@@ -195,5 +198,30 @@
         [self.commandDelegate sendPluginResult: pluginResult callbackId: command.callbackId];
     }];
 }
+
+
+- (void) getImageBase64String: (CDVInvokedUrlCommand *) command
+{
+    NSLog( @"Executing getImageBase64String()" );
+
+    [self.commandDelegate runInBackground: ^{
+        CDVPluginResult* pluginResult = nil;
+        NSString* path = [command.arguments objectAtIndex:0];
+    
+        DBPath *newPath = [[DBPath root] childPath:path];
+        DBFile *file = [[DBFilesystem sharedFilesystem] openFile:newPath error:nil];
+    
+        NSData *data = [file readData:nil];
+    
+        pluginResult = [CDVPluginResult
+            resultWithStatus: CDVCommandStatus_OK
+            messageAsString: [data base64EncodedStringWithOptions: 0]];
+        
+        [self.commandDelegate
+            sendPluginResult: pluginResult
+            callbackId: command.callbackId];
+    }];
+}
+
 
 @end
